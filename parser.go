@@ -58,7 +58,7 @@ func text(n *html.Node) string {
 	var ret string
 	// for every child, get the text and add it to the return variable
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		ret += text(c) + " "
+		ret += text(c)
 	}
 	return strings.Join(strings.Fields(ret), " ")
 }
