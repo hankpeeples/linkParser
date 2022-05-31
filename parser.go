@@ -40,8 +40,25 @@ func buildLink(n *html.Node) Link {
 			break
 		}
 	}
+	ret.Text = text(n)
+	return ret
+}
 
-	// TODO: get text
+func text(n *html.Node) string {
+	// base case, no need to look at children
+	if n.Type == html.TextNode {
+		return n.Data
+	}
+
+	if n.Type != html.ElementNode {
+		return ""
+	}
+
+	var ret string
+	// for every child, get the text and add it to the return variable
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
+		ret += text(c) + " "
+	}
 	return ret
 }
 
